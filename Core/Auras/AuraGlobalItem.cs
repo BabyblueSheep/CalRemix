@@ -14,7 +14,6 @@ namespace CalRemix.Core.Auras
 {
     public class AuraGlobalItem : GlobalItem
     {
-        /*
         public List<ModAura> Auras { get; } = [];
 
         public override bool InstancePerEntity => true;
@@ -31,14 +30,12 @@ namespace CalRemix.Core.Auras
 
             Auras.Add(AuraLoader.GetRandomAura(AuraRarity.Common));
         }
-        */
 
         public override void UpdateAccessory(Item item, Player player, bool hideVisual)
         {
             Main.NewText("test");
         }
 
-        /*
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
             if (item.IsAir) return;
@@ -82,6 +79,6 @@ namespace CalRemix.Core.Auras
                 if (aura == null) continue;
                 Auras.Add(aura);
             }
-        }*/
+        }
     }
 }
