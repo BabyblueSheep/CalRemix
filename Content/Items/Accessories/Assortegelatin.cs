@@ -34,6 +34,7 @@ namespace CalRemix.Content.Items.Accessories
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
+            Main.NewText("test");
             CalRemixPlayer modPlayer = player.GetModPlayer<CalRemixPlayer>();
             CalamityPlayer calPlayer = player.GetModPlayer<CalamityPlayer>();
             modPlayer.nuclegel = true;

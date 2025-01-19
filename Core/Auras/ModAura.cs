@@ -13,18 +13,32 @@ namespace CalRemix.Core.Auras
     /// <summary>
     /// This class allows you to define a custom aura prefix for an item and customize its behavior.
     /// </summary>
-    public abstract class ModAura : ModType
+    public abstract class ModAura : ModType, TagSerializable
     {
-        public int Type { get; internal set; }
-
-        public sealed override void SetupContent() => SetStaticDefaults();
-
+        public sealed override void SetupContent()
+        {
+            SetStaticDefaults();
+        }
         protected sealed override void Register()
         {
             ModTypeLookup<ModAura>.Register(this);
-            Type = AuraLoader.Add(this);
+            AuraLoader.Register(this);
         }
 
+        public TagCompound SerializeData()
+        {
+            return new TagCompound
+            {
+                ["id"] = ID
+            };
+        }
+        public static ModAura Load(TagCompound tag)
+        {
+            string id = tag.GetString("id");
+            return AuraLoader.GetAura(id);
+        }
+
+        public string ID => FullName;
         public string DisplayName => Language.GetTextValue($"Mods.{Mod.Name}.Auras.{Name}");
 
         public virtual AuraRarity Rarity => AuraRarity.Common;

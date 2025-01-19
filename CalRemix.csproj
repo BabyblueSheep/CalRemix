@@ -6,9 +6,6 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="localization\en-US_Mods.CalRemix.Auras.hjson" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="CalamityMod">
       <HintPath>..\CalamityMod\bin\Debug\net8.0\CalamityMod.dll</HintPath>
     </Reference>

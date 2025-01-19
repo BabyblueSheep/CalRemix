@@ -12,9 +12,8 @@ namespace CalRemix.Core.Auras
 {
     public static class AuraLoader
     {
-        public static int AuraCount => auras.Count;
-        internal static readonly List<ModAura> auras = new List<ModAura>();
-        internal static readonly Dictionary<AuraRarity, List<ModAura>> aurasByRarity = new Dictionary<AuraRarity, List<ModAura>>
+        private static readonly Dictionary<string, ModAura> _auras = [];
+        private static readonly Dictionary<AuraRarity, List<ModAura>> aurasByRarity = new()
         {
             { AuraRarity.Common, [] },
             { AuraRarity.Uncommon, [] },
@@ -23,26 +22,32 @@ namespace CalRemix.Core.Auras
             { AuraRarity.Legendary, [] },
         };
 
-        internal static int Add(ModAura aura)
+        internal static void Register(ModAura aura)
         {
-            auras.Add(aura);
+            _auras[aura.ID] = aura;
             aurasByRarity[aura.Rarity].Add(aura);
-            return AuraCount - 1;
         }
 
         internal static void Unload()
         {
-            auras.Clear();
+            _auras.Clear();
         }
 
         /// <summary>
-        /// Gets the ModDust instance with the given type. Returns null if no ModDust with the given type exists.
+        /// Gets the ModAura instance with the given ID. Returns null if no ModAura with the given ID exists.
         /// </summary>
-        public static ModAura GetAura(int type)
+        public static ModAura GetAura(string id)
         {
-            return type >= 0 && type < AuraCount ? auras[type] : null;
+            if (_auras.ContainsKey(id))
+                return _auras[id];
+            return null;
         }
 
+        /// <summary>
+        /// Gets a random ModAura instance given a rarity.
+        /// </summary>
+        /// <param name="rarity">The aura rarity.</param>
+        /// <returns>The random ModAura.</returns>
         public static ModAura GetRandomAura(AuraRarity rarity)
         {
             return Main.rand.NextFromCollection(aurasByRarity[rarity]);
