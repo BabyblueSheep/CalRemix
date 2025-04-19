@@ -37,6 +37,11 @@ namespace CalRemix
             var soRetroData = new ScreenShaderData(soRetro, "SoRetro");
             soRetroData.UseImage(Mod.Assets.Request<Texture2D>("Assets/ExtraTextures/SoRetro", AssetRequestMode.ImmediateLoad));
             Filters.Scene["CalRemix:SoRetro"] = new Filter(soRetroData, EffectPriority.VeryHigh);
+
+            var smoothFilter = Mod.Assets.Request<Effect>("Assets/Effects/SmoothFilter", AssetRequestMode.ImmediateLoad);
+            var smoothFilterData = new ScreenShaderData(smoothFilter, "SmootheningPass");
+            //smoothFilterData.UseImage(Mod.Assets.Request<Texture2D>("Assets/ExtraTextures/SoRetro", AssetRequestMode.ImmediateLoad));
+            Filters.Scene["CalRemix:SmoothFilter"] = new Filter(smoothFilterData, EffectPriority.VeryHigh);
         }
     }
 }
