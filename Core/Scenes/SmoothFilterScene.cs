@@ -10,7 +10,7 @@ namespace CalRemix.Core.Scenes
 
         public override bool IsSceneEffectActive(Player player)
         {
-            return true;//player.GetModPlayer<CalRemixPlayer>().soRetro;
+            return player.GetModPlayer<CalRemixPlayer>().retrofall;
         }
 
         public override void SpecialVisuals(Player player, bool isActive)
